@@ -18,11 +18,13 @@ The `main.go` file wires these modules together using dependency injection, allo
 
 ## Module Connections
 
-```mermaid
-graph TD
-    A[Input Module<br/>(input.Reader)] -- Read() --> B[Processor Module<br/>(processor.Processor)]
-    B -- Process() --> C[Output Module<br/>(output.Writer)]
-    C -- Write() --> D[Destination File]
+The data flows through the modules in the following order:
+
+```
++----------------+      +---------------------+      +------------------+
+|  Input Module  | ---> |  Processor Module   | ---> |  Output Module   |
+| (input.Reader) |      | (processor.Processor)|     | (output.Writer)  |
++----------------+      +---------------------+      +------------------+
 ```
 
 - **Input Module** implements the `Reader` interface: `Read() ([]byte, error)` and `Close() error`.
